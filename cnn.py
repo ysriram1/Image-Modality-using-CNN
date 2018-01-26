@@ -101,11 +101,10 @@ if __name__ == '__main__':
               batch_size=FLAGS.batch_size,
               epochs=FLAGS.epochs,
               verbose=True,
-              validation_data=(X_valid, Y_valid))
+              validation_data=(X_valid, y_valid))
 
     # print performance on test data
-    test_loss, test_acc = model.evaluate(X_test,
-                                         y_test, verbose=False)
+    test_loss, test_acc = model.evaluate(X_test, y_test, verbose=False)
     print('Accuracy on test data: ', test_acc)
     print('Cross Entropy Loss on test data: ', test_loss)
 
