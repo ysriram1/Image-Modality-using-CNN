@@ -53,7 +53,7 @@ if __name__ == '__main__':
 
     #### create network graph ####
     model = Sequential()
-    row, col, ch = 200, 300, 1 # of each image
+    row, col = 200, 300
     num_classes = len(set(y))
 
     # TODO: add some preprocessing layers
@@ -61,7 +61,7 @@ if __name__ == '__main__':
     # conv1 (need to specify input since it is first layer)
     # NOTE: that we used same padding to have output of same size
     model.add(Conv2D(filters=24, kernel_size=(5,5),
-                     input_shape=(row,col,ch),
+                     input_shape=(row,col),
                      strides=(2,2), padding='same'))
     model.add(Activation('relu'))
     # conv2
