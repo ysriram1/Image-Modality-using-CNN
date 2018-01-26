@@ -24,8 +24,8 @@ os.environ['image_data_format'] = 'channels_last'
 flags = tf.app.flags
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('data_dir','', "location of data folder")
-flags.DEFINE_string('save_dir','', "location to save model")
+flags.DEFINE_string('data_dir','/home/ec2-user/data', "location of data folder")
+flags.DEFINE_string('save_dir','/home/ec2-user/save', "location to save model")
 flags.DEFINE_integer('batch_size', 128, "size of each batch")
 flags.DEFINE_integer('epochs', 50, "number of epochs to run the training")
 flags.DEFINE_float('learn_rate', 0.0001, "learning rate to use for training")
@@ -56,7 +56,7 @@ if __name__ == '__main__':
     # NOTE: that we used same padding to have output of same size
     model.add(Conv2D(filters=24, kernel_size=(5,5),
                      input_shape=(row,col,ch),
-                     strides=(2,2), padding='same')
+                     strides=(2,2), padding='same'))
     model.add(Activation('relu'))
     # conv2
     model.add(Conv2D(filters=36, kernel_size=(5,5),
