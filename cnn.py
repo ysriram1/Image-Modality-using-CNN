@@ -34,9 +34,9 @@ if __name__ == '__main__':
 
     os.chdir(FLAGS.data_dir)
 
-    # read in data:
-    with open('./image_dict.pickle') as f: X = pickle.load(f).values()
-    with open('./modality_dict.pickle') as f: y = pickle.load(f).values()
+    # read in data (assumes binary files):
+    with open('./image_dict.pickle','rb') as f: X = pickle.load(f).values()
+    with open('./modality_dict.pickle','rb') as f: y = pickle.load(f).values()
 
     assert len(X) == len(y), "X,y size mismatch. Check data."
 
