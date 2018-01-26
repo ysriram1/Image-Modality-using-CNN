@@ -7,7 +7,7 @@ import numpy as np
 import pickle
 import tensorflow as tf
 from sklearn.model_selection import train_test_split
-
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 # use keras a wrapper on tensorflow
 from keras.models import Sequential
 from keras.layers import Lambda, Dense, Flatten, Dropout, Activation
@@ -15,6 +15,7 @@ from keras.layers.convolutional import Conv2D, Cropping2D
 from keras.layers.pooling import MaxPooling2D
 from keras.optimizers import Adadelta
 from keras.losses import categorical_crossentropy
+from keras.utils import to_categorical
 
 # set tensorflow as keras backend
 os.environ['KERAS_BACKEND'] = 'tensorflow'
@@ -41,6 +42,9 @@ if __name__ == '__main__':
     assert len(X) == len(y), "X,y size mismatch. Check data."
 
     # prepare data
+    # train, valid, test splits
+    num_classes = len(set(y))
+    y = to_categorical(y, num_classes)
     X_train, X_test, y_train, y_test = train_test_split(
                                         X, y, stratify=y,
                                         test_size=0.1)
@@ -48,20 +52,25 @@ if __name__ == '__main__':
                                     X_train, y_train,
                                     stratify=y_train, test_size=0.15)
     
-    X_train, X_test, X_valid = np.array(X_train), np.array(X_test), np.array(X_valid)
+
+    X_train, X_test, X_valid = np.float32(X_train), np.float32(X_test), np.float32(X_valid)
     y_train, y_test, y_valid = np.array(y_train), np.array(y_test), np.array(y_valid)
+
+    # convert to tensors
+    X_train = X_train.reshape(list(X_train.shape)+[1])
+    X_test = X_test.reshape(list(X_test.shape)+[1])
+    X_valid = X_valid.reshape(list(X_valid.shape)+[1])
 
     #### create network graph ####
     model = Sequential()
-    row, col = 200, 300
-    num_classes = len(set(y))
+    row, col, ch = 200, 300, 1
 
     # TODO: add some preprocessing layers
     # convolutional layers:
     # conv1 (need to specify input since it is first layer)
     # NOTE: that we used same padding to have output of same size
     model.add(Conv2D(filters=24, kernel_size=(5,5),
-                     input_shape=(row,col),
+                     input_shape=(row,col, ch),
                      strides=(2,2), padding='same'))
     model.add(Activation('relu'))
     # conv2
