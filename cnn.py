@@ -47,6 +47,9 @@ if __name__ == '__main__':
     X_train, X_valid, y_train, y_valid = train_test_split(
                                     X_train, y_train,
                                     stratify=y_train, test_size=0.15)
+    
+    X_train, X_test, X_valid = np.array(X_train), np.array(X_test), np.array(X_valid)
+    y_train, y_test, y_valid = np.array(y_train), np.array(y_test), np.array(y_valid)
 
     #### create network graph ####
     model = Sequential()
