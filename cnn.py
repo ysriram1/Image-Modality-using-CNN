@@ -41,9 +41,12 @@ if __name__ == '__main__':
     assert len(X) == len(y), "X,y size mismatch. Check data."
 
     # prepare data
-    X_train, X_test, y_valid, y_valid = train_test_split(
-                                    X, y, stratify=y,
-                                    test_size=0.15)
+    X_train, X_test, y_train, y_test = train_test_split(
+                                        X, y, stratify=y,
+                                        test_size=0.1)
+    X_train, X_valid, y_train, y_valid = train_test_split(
+                                    X_train, y_train,
+                                    stratify=y, test_size=0.15)
 
     #### create network graph ####
     model = Sequential()
@@ -68,7 +71,7 @@ if __name__ == '__main__':
     model.add(Activation('relu'))
     # maxpooling
     model.add(MaxPooling2D(pool_size=(2,2), strides=(1,1),
-                           padding='same')
+                           padding='same'))
     model.add(Activation('relu'))
     # conv4
     model.add(Conv2D(filters=36, kernel_size=(5,5),
