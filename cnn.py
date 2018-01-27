@@ -44,7 +44,7 @@ if __name__ == '__main__':
     # train, valid, test splits
     y = pd.Series(y)
     # TODO: Find a more efficient way to onehot encode
-    y = np.array(pd.to_dummies(y)) # onehot encoding y
+    y = np.array(pd.get_dummies(y)) # onehot encoding y
     X_train, X_test, y_train, y_test = train_test_split(
                                         X, y, stratify=y,
                                         test_size=0.1)
