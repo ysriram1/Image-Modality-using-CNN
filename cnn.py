@@ -42,6 +42,7 @@ if __name__ == '__main__':
 
     # prepare data
     # train, valid, test splits
+    num_classes = len(set(y))
     y = pd.Series(y)
     # TODO: Find a more efficient way to onehot encode
     y = np.array(pd.get_dummies(y)) # onehot encoding y
@@ -64,7 +65,6 @@ if __name__ == '__main__':
     #### create network graph ####
     model = Sequential()
     row, col, ch = 200, 300, 1
-    num_classes = len(set(y))
 
     # TODO: add some preprocessing layers
     # convolutional layers:
