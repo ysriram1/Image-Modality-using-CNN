@@ -108,7 +108,7 @@ if __name__ == '__main__':
     # create and run model
     model.compile(loss=categorical_crossentropy,
                   optimizer=Adadelta(),
-                  metric=['accuracy'])
+                  metrics=['accuracy'])
 
     model.fit(X_train, y_train,
               batch_size=FLAGS.batch_size,
