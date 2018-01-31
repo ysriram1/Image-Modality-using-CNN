@@ -123,6 +123,7 @@ if __name__ == '__main__':
     print('Accuracy on test data: ', test_acc)
     print('Cross Entropy Loss on test data: ', test_loss)
     print(predictions_sum)
+    print(predictions)
 
     # save model for future use
     model.save(FLAGS.save_dir + '/model.h5')
