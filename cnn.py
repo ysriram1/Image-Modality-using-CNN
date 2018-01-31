@@ -27,7 +27,7 @@ FLAGS = flags.FLAGS
 flags.DEFINE_string('data_dir','/home/ec2-user/data', "location of data folder")
 flags.DEFINE_string('save_dir','/home/ec2-user/save', "location to save model")
 flags.DEFINE_integer('batch_size', 128, "size of each batch")
-flags.DEFINE_integer('epochs', 50, "number of epochs to run the training")
+flags.DEFINE_integer('epochs', 20, "number of epochs to run the training")
 flags.DEFINE_float('learn_rate', 0.0001, "learning rate to use for training")
 
 if __name__ == '__main__':
