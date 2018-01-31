@@ -118,8 +118,11 @@ if __name__ == '__main__':
 
     # print performance on test data
     test_loss, test_acc = model.evaluate(X_test, y_test, verbose=False)
+    predictions = model.predict(X_test)
+    predictions_sum = np.sum(X_test, 1) # to see if it is always predicting one type
     print('Accuracy on test data: ', test_acc)
     print('Cross Entropy Loss on test data: ', test_loss)
+    print(predictions_sum)
 
     # save model for future use
     model.save(FLAGS.save_dir + '/model.h5')
